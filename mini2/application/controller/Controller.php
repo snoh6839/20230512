@@ -3,7 +3,8 @@
 namespace application\controller;
 
 use application\util\UrlUtil;
-
+use \AllowDynamicProperties;
+#[AllowDynamicProperties]
 class Controller {
     protected $model;
     private static $modelList = [];
@@ -51,7 +52,6 @@ class Controller {
     }
 
     //method that sets the DynamicProperty
-    // if it's upto 8v #[AllowDynamicProperties] + use \AllowDynamicProperties;
     public function addDynamicProperty($key, $val)
     {
         $this->$key = $val;
