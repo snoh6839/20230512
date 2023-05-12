@@ -17,7 +17,11 @@ class Controller {
     }
 
     protected function getModel($identityName){
-
+        if(!in_array($identityName, self::$modelList)){
+            $modelName = _PATH_MODEL.$identityName._BASE_FILENAME_MODEL;
+            self::$modelList[$identityName] = new $modelName();
+        }
+        return self::$modelList[$identityName];
     }
 }
 ?>
