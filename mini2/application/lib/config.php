@@ -20,4 +20,6 @@ define("_BASE_FILENAME_CONTROLLER", "Controller");
 define("_BASE_FILENAME_MODEL", "Model");
 
 define("_BASE_REDIRECT", "Location: ");
+
+define("_STR_LOGIN_ID", "user_id");
 ?>

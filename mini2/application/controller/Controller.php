@@ -8,6 +8,7 @@ use \AllowDynamicProperties;
 class Controller {
     protected $model;
     private static $modelList = [];
+    private static $arrNeedAuth = ["anime/detail"];
 
     public function __construct($identityName, $action)
     {
@@ -15,6 +16,9 @@ class Controller {
         if(!isset($_SESSION)){
             session_start();
         }
+
+        // check user login and auth
+        $this->checkAuthorization();
 
         //call model
         $this->model = $this->getModel($identityName);
@@ -43,7 +47,7 @@ class Controller {
     }
 
     //check param and return view or redirect
-    public function getView($view){
+    protected function getView($view){
         if(strpos($view, _BASE_REDIRECT) === 0){
             header($view);
             exit();
@@ -52,9 +56,21 @@ class Controller {
     }
 
     //method that sets the DynamicProperty
-    public function addDynamicProperty($key, $val)
+    protected function addDynamicProperty($key, $val)
     {
         $this->$key = $val;
+    }
+
+    //method that check user's login and auth
+    protected function checkAuthorization()
+    {
+        $urlPath = UrlUtil::getUrl();
+        foreach (self::$arrNeedAuth as $authPath) {
+            if(!isset($_SESSION[_STR_LOGIN_ID]) && strpos($urlPath, $authPath) === 0){
+                header(_BASE_REDIRECT."/user/login");
+                exit();
+            } 
+        }
     }
 }
 ?>
