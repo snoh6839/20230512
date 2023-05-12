@@ -18,5 +18,13 @@ class UserController extends Controller {
         $_SESSION[_STR_LOGIN_ID] = $_POST["id"];
         return _BASE_REDIRECT."/anime/detail";
     }
+
+    //logout method
+    public function logoutGet()
+    {
+        session_unset();
+        session_destroy();
+        return "login" . _EXTENTION_PHP;
+    }
 }
 ?>
