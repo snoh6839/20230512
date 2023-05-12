@@ -2,8 +2,7 @@
 
 namespace application\model;
 
-class UserModel extends Model
+class AnimeModel extends Model
 {
 
 }
-?>

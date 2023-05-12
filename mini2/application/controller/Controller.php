@@ -43,6 +43,10 @@ class Controller {
 
     //check param and return view or redirect
     public function getView($view){
+        if(strpos($view, _BASE_REDIRECT) === 0){
+            header($view);
+            exit();
+        }
         return _PATH_VIEW.$view;
     }
 }
