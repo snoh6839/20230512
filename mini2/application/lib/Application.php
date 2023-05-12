@@ -28,7 +28,7 @@ class Application {
         new $controllerName($identityName, $action);
 
         // var_dump($arrPath);
-        var_dump($controllerName);
+        // var_dump($controllerName);
     }
 
     // new application\lib\Application
