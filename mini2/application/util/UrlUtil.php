@@ -13,6 +13,11 @@ class UrlUtil{
         $url = UrlUtil::getUrl();
         return $url !== "" ? explode("/", $url) : "";
     }
+
+    // replace "/" into "\"
+    public static function replacSlashToBackslash($str){
+        return str_replace("/","\\",$str);
+    }
     
 }
 ?>

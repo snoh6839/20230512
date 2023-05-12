@@ -24,7 +24,7 @@ class Application {
         }
 
         //call controller
-        $controllerName = str_replace("/","\\", _PATH_CONTROLLER . $identityName . _BASE_FILENAME_CONTROLLER);
+        $controllerName = UrlUtil::replacSlashToBackslash(_PATH_CONTROLLER . $identityName . _BASE_FILENAME_CONTROLLER);
         new $controllerName($identityName, $action);
 
         // var_dump($arrPath);
