@@ -49,5 +49,12 @@ class Controller {
         }
         return _PATH_VIEW.$view;
     }
+
+    //method that sets the DynamicProperty
+    // if it's upto 8v #[AllowDynamicProperties] + use \AllowDynamicProperties;
+    public function addDynamicProperty($key, $val)
+    {
+        $this->$key = $val;
+    }
 }
 ?>

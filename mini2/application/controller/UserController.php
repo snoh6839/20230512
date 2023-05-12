@@ -8,6 +8,12 @@ class UserController extends Controller {
 
     public function loginPost()
     {
+        $result = $this->model->getUser($_POST);
+        if(count($result) === 0) {
+            $errMsg = "Invalid ID or PW";
+            addDynamicProperty("errMsg", $errMsg);
+            return "login". _EXTENTION_PHP;
+        }
         return _BASE_REDIRECT."/anime/detail";
     }
 }

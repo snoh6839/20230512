@@ -10,6 +10,7 @@
 
 <body>
     <h1>Login</h1>
+    <h3><?php echo isset($this->errMsg) ? $this->errMsg : ""; ?></h3>
 
     <form action="/user/login" method="post">
         <label for="id">ID</label>
