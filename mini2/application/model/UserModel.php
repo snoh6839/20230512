@@ -30,15 +30,18 @@ class UserModel extends Model
         catch(Exception $e){
             echo "UserModel -> getUser Error : ". $e->getMessage();
             exit();
-        } finally {
-            $this->closeConn();
-        }
+        } 
+        
+        // finally {
+        //     $this->closeConn();
+        // }
 
         return $result;
     }
 
     public function setUser($data)
     {
+        // var_dump($data, $this->conn);
         $sql =
             " insert into "
             . " user_info "
@@ -55,7 +58,8 @@ class UserModel extends Model
             . " , "
             . " :pw "
             . " , "
-            . " :name ";
+            . " :name "
+            . " ) ";
 
         $prepare = [
             ":id" => $data["id"]
@@ -63,12 +67,12 @@ class UserModel extends Model
             , ":name" => $data["name"]
         ];
         try {
-            $this->conn->beginTransaction();
+            // $this->conn->beginTransaction();
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($prepare);
             $this->conn->commit();
         } catch (Exception $e) {
-            $this->conn->rollBack();
+            // $this->conn->rollBack();
             echo "UserModel -> getUser Error : " . $e->getMessage();
             exit();
         } finally {

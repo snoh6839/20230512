@@ -27,23 +27,31 @@ class UserController extends Controller {
         return "login" . _EXTENTION_PHP;
     }
 
-    public function sinUpGet()
+    public function signupGet()
     {
         return "signup" . _EXTENTION_PHP;
     }
 
-    public function sinUpPost()
+    public function signupPost()
     {
+        // $this->model->conn->beginTransaction();
         $result = $this->model->getUser($_POST);
         if ( count($result) > 0 ) {
-            echo 'This User Already Exists';
+            $errMsg = "This User Already Exists. Please Login.";
+            $this->addDynamicProperty("errMsg", $errMsg);
+            return "login" . _EXTENTION_PHP;
+            $this->model->closeConn();
         } else {
+            // $this->model->conn->beginTransaction();
             $data = array(
-                'user_name' => $_POST['name'],
-                'user_id' => $_POST['id'],
-                'user_pw' => $_POST['pw']
+                'id' => $_POST['id']
+                ,'pw' => $_POST['pw']
+                ,'name' => $_POST['name']
             );
-            return $this->model->setUser($data);
+            $this->model->setUser($data);
+            $errMsg = "Successfully Signed Up. Please Login.";
+            $this->addDynamicProperty("errMsg", $errMsg);
+            return "login" . _EXTENTION_PHP;
         }
     
 

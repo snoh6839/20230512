@@ -11,14 +11,15 @@
 <body>
     <form method="post" action="/user/signup">
         NAME:<br>
-        <input type="text" name="user_name">
+        <input type="text" name="name" id="name">
+        <br><br>
         ID:<br>
-        <input type="text" name="user_id">
+        <input type="text" name="id" id="id">
         <br><br>
         PW:<br>
-        <input type="password" name="user_pw">
+        <input type="password" name="pw" id="pw">
         <br><br>
-        <button type="submit" value="Submit">
+        <button type="submit" value="Submit">Sign Up</button>
     </form>
 </body>
 
