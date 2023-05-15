@@ -37,6 +37,45 @@ class UserModel extends Model
         return $result;
     }
 
+    public function setUser($data)
+    {
+        $sql =
+            " insert into "
+            . " user_info "
+            . " ( "
+            . " user_id "
+            . " , "
+            . " user_pw "
+            . " , "
+            . " user_name "
+            . " ) "
+            . " VALUES "
+            . " ( "
+            . " :id "
+            . " , "
+            . " :pw "
+            . " , "
+            . " :name ";
+
+        $prepare = [
+            ":id" => $data["id"], ":pw" => $data["pw"], ":name" => $data["name"]
+        ];
+        try {
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($prepare);
+            $result = $stmt->fetchAll();
+            $this->conn->commit();
+        } catch (Exception $e) {
+            $this->conn->rollBack();
+            echo "UserModel -> getUser Error : " . $e->getMessage();
+            exit();
+        } finally {
+            $this->closeConn();
+        }
+
+        return $result;
+    }
+
     
 }
 ?>
