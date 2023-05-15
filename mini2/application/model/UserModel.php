@@ -58,12 +58,14 @@ class UserModel extends Model
             . " :name ";
 
         $prepare = [
-            ":id" => $data["id"], ":pw" => $data["pw"], ":name" => $data["name"]
+            ":id" => $data["id"]
+            , ":pw" => $data["pw"]
+            , ":name" => $data["name"]
         ];
         try {
+            $this->conn->beginTransaction();
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($prepare);
-            $result = $stmt->fetchAll();
             $this->conn->commit();
         } catch (Exception $e) {
             $this->conn->rollBack();
@@ -72,8 +74,6 @@ class UserModel extends Model
         } finally {
             $this->closeConn();
         }
-
-        return $result;
     }
 
     

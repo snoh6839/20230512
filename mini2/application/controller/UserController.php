@@ -34,12 +34,8 @@ class UserController extends Controller {
 
     public function sinUpPost()
     {
-        $user_name = $_POST['name'];
-        $email_id = $_POST['id'];
-        $password = $_POST['pw'];
-        $count = $this->model->getUser($user_name);
-        if ($count > 0
-        ) {
+        $result = $this->model->getUser($_POST);
+        if ( count($result) > 0 ) {
             echo 'This User Already Exists';
         } else {
             $data = array(
@@ -47,7 +43,7 @@ class UserController extends Controller {
                 'user_id' => $_POST['id'],
                 'user_pw' => $_POST['pw']
             );
-            $result = $this->model->setUser($data);
+            return $this->model->setUser($data);
         }
     
 
